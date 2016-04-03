@@ -1,0 +1,18 @@
+﻿<Window x:Class="FibonacciApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FibonacciApp"
+        mc:Ignorable="d"
+        Title="FibonacciApp" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="335,42,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnStart_Click"/>
+        <TextBox x:Name="txtInputCount" HorizontalAlignment="Left" Height="24" Margin="190,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="NumericOnly" />
+        <Label x:Name="lbResult" Content="Результат" HorizontalAlignment="Left" Margin="30,90,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="1.385,0.538"/>
+        <Label x:Name="lbResultValue" HorizontalAlignment="Left" Margin="94,90,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label x:Name="labelCycleCount" Content="Количество циклов" HorizontalAlignment="Left" Margin="30,42,0,0" VerticalAlignment="Top" Width="140"/>
+        <Label x:Name="labelResultPresentation" Content="....." HorizontalAlignment="Left" Margin="190,90,0,0" VerticalAlignment="Top" Width="220"/>
+
+    </Grid>
+</Window>
