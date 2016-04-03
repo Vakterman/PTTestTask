@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using StructureMap;
-using FinbonacciAsyncLogic.Entities;
 using FinbonacciAsyncLogic.Interfaces;
 
 
@@ -24,9 +23,19 @@ namespace FibonacciApp
         private IFibonacciLogicFacade<int> FibonacciClientFacade {
             get { return _clientFacade ?? (_clientFacade = CreateClientFacade()); }
         }
+
+
+
+        private ILogger _logger;
+        private ILogger Logger
+        {
+            get { return _logger ?? (_logger = Container.GetInstance<ILogger>()); }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            Logger.LogInfoMessage("Приложение запущено");
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -36,14 +45,19 @@ namespace FibonacciApp
                 int countOfCalculatingCicles = int.Parse(txtInputCount.Text);
                 labelResultPresentation.Content = "Ожидается вычисление....";
 
+                Logger.LogInfoMessage(string.Format("Вычисление запущено с количеством циклов {0}",countOfCalculatingCicles));
+
                 var result = FibonacciClientFacade.Evaluate(countOfCalculatingCicles);
+
 
                 if (result == -1)
                 {
                     labelResultPresentation.Content = "Истёк таймаут операции";
+                    Logger.LogInfoMessage(string.Format("Вычисление завершено истёк таймаут операции"));
                 }
                 else {
                     labelResultPresentation.Content = result;
+                    Logger.LogInfoMessage(string.Format("Вычисление завершено с результатом {0}", result));
                 }
                 
             }   

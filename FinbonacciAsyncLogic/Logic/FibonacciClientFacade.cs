@@ -14,12 +14,18 @@ namespace FinbonacciAsyncLogic.Logic
         private IConfigurationManager _configurationManager;
         private AutoResetEvent _operationCompleteEvent;
         private FibonacciOperation _result;
+        private ILogger _logger;
+        private IAsyncResultHandler<FibonacciOperation> _fibonacciResultReceiver;
+        private IAsyncSender<FibonacciOperation> _asyncSender;
+        private IFibonacciCalculator<FibonacciOperation> _calculator;
 
-        IAsyncResultHandler<FibonacciOperation> _fibonacciResultReceiver;
-        IAsyncSender<FibonacciOperation> _asyncSender;
-        IFibonacciCalculator<FibonacciOperation> _calculator;
+        public FibonacciClientFacade(IConfigurationManager configurationManager, IAsyncSender<FibonacciOperation> senderAsyncOperations, IAsyncResultHandler<FibonacciOperation> fibonacciResultReceiver,IFibonacciCalculator<FibonacciOperation> calculator, ILogger logger){
 
-        public FibonacciClientFacade(IConfigurationManager configurationManager, IAsyncSender<FibonacciOperation> senderAsyncOperations, IAsyncResultHandler<FibonacciOperation> fibonacciResultReceiver,IFibonacciCalculator<FibonacciOperation> calculator){
+            if (logger == null)
+            {
+                throw new ArgumentNullException("logger");
+            }
+
             if (configurationManager == null)
             {
                 throw new ArgumentNullException("configurationManager");
@@ -46,6 +52,7 @@ namespace FinbonacciAsyncLogic.Logic
             _asyncSender = senderAsyncOperations;
             _fibonacciResultReceiver = fibonacciResultReceiver;
             _calculator = calculator;
+            _logger = logger;
 
             
         }
@@ -74,6 +81,8 @@ namespace FinbonacciAsyncLogic.Logic
 
         private void OperationAsyncResultHandler(FibonacciOperation operationResult)
         {
+            _logger.LogInfoMessage(String.Format("Количество циклов:{0},текущий результат {1}", operationResult.CycleCount, operationResult.Value));
+
             if (operationResult.IsOperationInProgress())
             {
                 _calculator.Calculate(operationResult);
@@ -91,6 +100,8 @@ namespace FinbonacciAsyncLogic.Logic
                     Value = operationResult.Value,
                     CycleCount = operationResult.CycleCount
                 };
+
+                _logger.LogInfoMessage(String.Format("Завершение вычислений текущий результат {0}", operationResult.Value));
 
                 _operationCompleteEvent.Set();
             }

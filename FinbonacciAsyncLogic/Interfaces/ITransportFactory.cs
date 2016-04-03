@@ -3,7 +3,7 @@ using MassTransit;
 
 namespace FinbonacciAsyncLogic.Interfaces
 {
-    public interface ITransportFactory
+    public interface ISenderTransportFactory
     {
         IBusControl CreateSenderControl();
     }

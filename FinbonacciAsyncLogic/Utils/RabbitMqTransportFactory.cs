@@ -5,7 +5,7 @@ using MassTransit.Transports;
 
 namespace FinbonacciAsyncLogic.Utils
 {
-    public class RabbitMqTransportFactory : ITransportFactory
+    public class RabbitMqTransportFactory : ISenderTransportFactory
     {
         private IConfigurationManager _configurationManager;
 

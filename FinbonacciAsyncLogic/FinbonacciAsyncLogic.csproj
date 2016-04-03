@@ -71,16 +71,19 @@
   <ItemGroup>
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Interfaces\IAsyncResultHandler.cs" />
-    <Compile Include="Interfaces\IClientFacade.cs" />
+    <Compile Include="Interfaces\IFibonacciLogicFacade.cs" />
     <Compile Include="Interfaces\IConfigurationManager.cs" />
     <Compile Include="Interfaces\IFibonacciCalculator.cs" />
     <Compile Include="Interfaces\IAsyncSender.cs" />
-    <Compile Include="Entities\AsyncResult.cs" />
+    <Compile Include="Entities\FibonacciOperation.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ITransportFactory.cs" />
     <Compile Include="Logic\FibonacciCalculator.cs" />
     <Compile Include="Logic\FibonacciClientFacade.cs" />
     <Compile Include="Logic\FibonacciServerFacade.cs" />
+    <Compile Include="Logic\Net4LoggerWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transport\MassTransitConusmer.cs" />
     <Compile Include="Transport\RabbitMqResultHandler.cs" />
     <Compile Include="Transport\RabbitMqBusSender.cs" />
     <Compile Include="Transport\RestSharpAsyncSender.cs" />

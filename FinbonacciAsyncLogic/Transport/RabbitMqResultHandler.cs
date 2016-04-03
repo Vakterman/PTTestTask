@@ -29,7 +29,7 @@ namespace FinbonacciAsyncLogic.Transport
                 var consumer = new MassTransitConusmer();
                 consumer.AddHandler(asyncResultHandler);
 
-                var busController = CreateAndStartBussControllerWithSpecifiedConsumer(consumer);
+                _busController = CreateAndStartBussControllerWithSpecifiedConsumer(consumer);
 
                 return true;
             }
@@ -39,15 +39,19 @@ namespace FinbonacciAsyncLogic.Transport
 
         public void Dispose()
         {
-            StopAllBusControllers();
+            if (_busController == null)
+            {
+                _busController.Stop();
+            }
         }
 
         ~RabbitMqResultHandler() {
-            StopAllBusControllers();
+            if (_busController == null)
+            {
+                _busController.Stop();
+            }
         }
-        private void StopAllBusControllers() {
-            _busController.Stop();
-        }
+     
         private IBusControl CreateAndStartBussControllerWithSpecifiedConsumer(MassTransitConusmer consumerInstance)
         {
             var busControl = CreateBusController(consumerInstance);
@@ -73,27 +77,6 @@ namespace FinbonacciAsyncLogic.Transport
                     e.Instance(consumerInstance);
                 });
             });
-        }
-        protected sealed class MassTransitConusmer : IConsumer<FibonacciOperation>
-        {
-            delegate void HandleAsyncResult(FibonacciOperation fibonacciOpeartion);
-
-            private HandleAsyncResult _asyncResultHandlerAsync;
-
-            public void AddHandler(Action<FibonacciOperation> asyncresult)
-            {
-                _asyncResultHandlerAsync += (result) => asyncresult(result);
-            }
-            public async Task Consume(ConsumeContext<FibonacciOperation> context)
-            {
-                var fibonacciOperation = context.Message;
-
-                await Task.Run(() =>
-                {
-                    _asyncResultHandlerAsync(fibonacciOperation);
-                });
-            }
-
         }
     }
 }

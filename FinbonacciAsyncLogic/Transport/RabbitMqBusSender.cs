@@ -2,16 +2,15 @@
 using FinbonacciAsyncLogic.Entities;
 using System;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
 
 namespace FinbonacciAsyncLogic.Transport
 {
     public class RabbitMqBusSender : IAsyncSender<FibonacciOperation>
     {
-        private ITransportFactory _transportFactory;
+        private ISenderTransportFactory _transportFactory;
         private IBusControl _busControl;
 
-        public RabbitMqBusSender(ITransportFactory transportFactory) {
+        public RabbitMqBusSender(ISenderTransportFactory transportFactory) {
             if (transportFactory == null)
             {
                 throw new ArgumentNullException("transportFactory");
