@@ -2,7 +2,7 @@
 {
     public class FibonacciOperation
     {
-        public int Value;
-        public int CycleCount;
+        public long Value;
+        public long CycleCount;
     }
 }

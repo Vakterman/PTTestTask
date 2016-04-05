@@ -25,9 +25,9 @@ namespace FinbonacciAsyncLogic.Transport
         public void SendAsync(FibonacciOperation objectForSend)
         {
             var client = new RestClient(_configurationManager.WebApiServerAddress);
-            var request = new RestRequest("api/fibonacci/{val}/{cyclecount}", Method.PUT);
-            request.AddUrlSegment("val", objectForSend.Value.ToString());
-            request.AddUrlSegment("cyclecount", objectForSend.CycleCount.ToString());
+            var request = new RestRequest("api/fibonacci", Method.PUT);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(objectForSend);
 
             IRestResponse response = client.Execute(request);
         }

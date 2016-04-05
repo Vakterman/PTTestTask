@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinbonacciAsyncLogic", "Fin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciWebApi", "FibonacciWebApi\FibonacciWebApi.csproj", "{2D56B955-953B-4B68-8776-9A9EA3074CEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciLogicTests", "FibonacciLogicTests\FibonacciLogicTests.csproj", "{3AF3692C-4ACE-4546-A305-2465F20BF9CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2D56B955-953B-4B68-8776-9A9EA3074CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D56B955-953B-4B68-8776-9A9EA3074CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D56B955-953B-4B68-8776-9A9EA3074CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF3692C-4ACE-4546-A305-2465F20BF9CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF3692C-4ACE-4546-A305-2465F20BF9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF3692C-4ACE-4546-A305-2465F20BF9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF3692C-4ACE-4546-A305-2465F20BF9CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

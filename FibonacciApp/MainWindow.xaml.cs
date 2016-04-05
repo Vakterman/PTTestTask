@@ -14,13 +14,13 @@ namespace FibonacciApp
         private IContainer _container;
         private IContainer Container { get { return _container ??(_container = ((App)Application.Current).Container); }}
 
-        private IFibonacciLogicFacade<int> _clientFacade;
-        private IFibonacciLogicFacade<int> CreateClientFacade() {
-            return Container.GetInstance<IFibonacciLogicFacade<int>>();
+        private IFibonacciLogicFacade<long> _clientFacade;
+        private IFibonacciLogicFacade<long> CreateClientFacade() {
+            return Container.GetInstance<IFibonacciLogicFacade<long>>();
         }
 
 
-        private IFibonacciLogicFacade<int> FibonacciClientFacade {
+        private IFibonacciLogicFacade<long> FibonacciClientFacade {
             get { return _clientFacade ?? (_clientFacade = CreateClientFacade()); }
         }
 
@@ -42,7 +42,7 @@ namespace FibonacciApp
         {  
             if (!string.IsNullOrEmpty(txtInputCount.Text))
             {
-                int countOfCalculatingCicles = int.Parse(txtInputCount.Text);
+                long countOfCalculatingCicles = long.Parse(txtInputCount.Text);
                 labelResultPresentation.Content = "Ожидается вычисление....";
 
                 Logger.LogInfoMessage(string.Format("Вычисление запущено с количеством циклов {0}",countOfCalculatingCicles));

@@ -21,8 +21,7 @@ namespace FibonacciWebApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{val}/{cyclecount}",
-                defaults: new { val = RouteParameter.Optional, cyclecount = RouteParameter.Optional }
+                routeTemplate: "api/{controller}"
             );
 
             config.DependencyResolver = new DependencyResolver(CreateAndConfigureContainer());

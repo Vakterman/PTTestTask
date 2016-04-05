@@ -22,12 +22,9 @@ namespace FibonacciWebApi.Controllers
             _facadeLogic = facadeLogic;
         }
 
-        public void Put(int val, int cyclecount)
+        public void Put([FromBody]FibonacciOperation fibonaccyOperation)
         {
-            _facadeLogic.Evaluate(new FibonacciOperation {
-                Value = val,
-                CycleCount = cyclecount
-            });
+            _facadeLogic.Evaluate(fibonaccyOperation);
         }
     }
 }

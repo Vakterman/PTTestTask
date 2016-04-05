@@ -34,7 +34,7 @@ namespace FibonacciApp
                     x.For<IAsyncResultHandler<FibonacciOperation>>().Use<RabbitMqResultHandler>();
                     x.For<IFibonacciCalculator<FibonacciOperation>>().Use<FibonacciCalculator>();
                     x.For<IFibonacciCalculator<FibonacciOperation>>().Use<FibonacciCalculator>();
-                    x.For<IFibonacciLogicFacade<int>>().Use<FibonacciClientFacade>();
+                    x.For<IFibonacciLogicFacade<long>>().Use<FibonacciClientFacade>();
                 });
 
             }

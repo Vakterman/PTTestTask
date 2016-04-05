@@ -7,7 +7,7 @@ using FinbonacciAsyncLogic.Utils;
 
 namespace FinbonacciAsyncLogic.Logic
 {
-    public class FibonacciClientFacade : IFibonacciLogicFacade<int>
+    public class FibonacciClientFacade : IFibonacciLogicFacade<long>
     {
         private const int  StartFibonacciValue = 1;
 
@@ -56,7 +56,7 @@ namespace FinbonacciAsyncLogic.Logic
 
             
         }
-        public int Evaluate(int tryCount)
+        public long Evaluate(long tryCount)
         {
             _result = null;
 
@@ -107,7 +107,7 @@ namespace FinbonacciAsyncLogic.Logic
             }
         }
 
-        private void CalculateAndSendFirstCycle(int tryCount) {
+        private void CalculateAndSendFirstCycle(long tryCount) {
 
             var operationObject = new FibonacciOperation
             {
