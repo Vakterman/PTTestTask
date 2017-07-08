@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using FinbonacciAsyncLogic.Entities;
 using FinbonacciAsyncLogic.Interfaces;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
-using System.Collections.Generic;
 
 namespace FinbonacciAsyncLogic.Transport
 {
@@ -14,42 +11,28 @@ namespace FinbonacciAsyncLogic.Transport
         private IBusControl _busController;
         public RabbitMqResultHandler(IConfigurationManager configuration)
         {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
-
-            _configuration = configuration;
+			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
            
         }
         public bool AddHandler(Action<FibonacciOperation> asyncResultHandler)
         {
-            if (_busController == null)
-            {
-                var consumer = new MassTransitConusmer();
-                consumer.AddHandler(asyncResultHandler);
+	        if (_busController != null) return false;
+	        var consumer = new MassTransitConusmer();
+	        consumer.AddHandler(asyncResultHandler);
 
-                _busController = CreateAndStartBussControllerWithSpecifiedConsumer(consumer);
+	        _busController = CreateAndStartBussControllerWithSpecifiedConsumer(consumer);
 
-                return true;
-            }
-
-            return false;
+	        return true;
         }
 
         public void Dispose()
         {
-            if (_busController == null)
-            {
-                _busController.Stop();
-            }
+	        _busController?.Stop();
         }
 
-        ~RabbitMqResultHandler() {
-            if (_busController == null)
-            {
-                _busController.Stop();
-            }
+        ~RabbitMqResultHandler()
+        {
+	        _busController?.Stop();
         }
      
         private IBusControl CreateAndStartBussControllerWithSpecifiedConsumer(MassTransitConusmer consumerInstance)
@@ -60,7 +43,6 @@ namespace FinbonacciAsyncLogic.Transport
 
             return busControl;
         }
-
 
         private IBusControl CreateBusController(IConsumer<FibonacciOperation> consumerInstance)
         {

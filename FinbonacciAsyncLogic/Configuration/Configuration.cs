@@ -9,7 +9,6 @@ namespace FinbonacciAsyncLogic.Configuration
         private const string _QueueFibonacciName = "FibonacciQueueName";
         private const string _UserName = "UserName";
         private const string _PasswordName = "Password";
-        private const string _QueueAdress = "QueueFibonacciAdress";
         private const string _WebApiServerAddressName = "WebApiServerAddressName";
         private const string _DefaultTimeoutParamName = "DefaultTimeoutParamName";
 

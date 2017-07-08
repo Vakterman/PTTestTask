@@ -74,7 +74,7 @@
     <Compile Include="Interfaces\IFibonacciLogicFacade.cs" />
     <Compile Include="Interfaces\IConfigurationManager.cs" />
     <Compile Include="Interfaces\IFibonacciCalculator.cs" />
-    <Compile Include="Interfaces\IAsyncSender.cs" />
+    <Compile Include="Interfaces\ISender.cs" />
     <Compile Include="Entities\FibonacciOperation.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ITransportFactory.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Transport\MassTransitConusmer.cs" />
     <Compile Include="Transport\RabbitMqResultHandler.cs" />
     <Compile Include="Transport\RabbitMqBusSender.cs" />
-    <Compile Include="Transport\RestSharpAsyncSender.cs" />
+    <Compile Include="Transport\RestSharpSender.cs" />
     <Compile Include="Utils\FibonacciOperationExtensitons.cs" />
     <Compile Include="Utils\RabbitMqTransportFactory.cs" />
   </ItemGroup>

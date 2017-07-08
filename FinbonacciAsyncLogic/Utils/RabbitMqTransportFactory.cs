@@ -7,27 +7,22 @@ namespace FinbonacciAsyncLogic.Utils
 {
     public class RabbitMqTransportFactory : ISenderTransportFactory
     {
-        private IConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         public RabbitMqTransportFactory(IConfigurationManager configurationManager)
         {
-            if (configurationManager == null)
-            {
-                throw new ArgumentNullException("configurationManager");
-            }
-
-            _configurationManager = configurationManager;
+			_configurationManager = configurationManager ?? throw new ArgumentNullException(nameof(configurationManager));
         }
 
         public IBusControl CreateSenderControl()
         {
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                var host = cfg.Host(new Uri(_configurationManager.QueueFibonacciAdress), h =>
-                {
-                    h.Username(_configurationManager.ServiceUserName);
-                    h.Password(_configurationManager.ServicePasswordUser);
-                });
+	            cfg.Host(new Uri(_configurationManager.QueueFibonacciAdress), h =>
+	            {
+		            h.Username(_configurationManager.ServiceUserName);
+		            h.Password(_configurationManager.ServicePasswordUser);
+	            });
             });
 
             return busControl;

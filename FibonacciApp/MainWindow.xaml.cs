@@ -24,8 +24,6 @@ namespace FibonacciApp
             get { return _clientFacade ?? (_clientFacade = CreateClientFacade()); }
         }
 
-
-
         private ILogger _logger;
         private ILogger Logger
         {
@@ -63,13 +61,11 @@ namespace FibonacciApp
             }   
         }
 
-
         private void NumericOnly(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             e.Handled = IsTextNumeric(e.Text);
 
         }
-
 
         private static bool IsTextNumeric(string str)
         {

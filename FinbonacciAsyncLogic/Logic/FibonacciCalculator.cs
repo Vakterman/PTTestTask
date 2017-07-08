@@ -1,19 +1,15 @@
-﻿using System;
-using FinbonacciAsyncLogic.Utils;
+﻿using FinbonacciAsyncLogic.Entities;
 using FinbonacciAsyncLogic.Interfaces;
-using FinbonacciAsyncLogic.Entities;
 
-namespace FinbonacciAsyncLogic
+namespace FinbonacciAsyncLogic.Logic
 {
     public class FibonacciCalculator : IFibonacciCalculator<FibonacciOperation>
     {
-        public FibonacciCalculator() {      
-        }
-        public virtual void Calculate(FibonacciOperation operationData)
+	    public virtual void Calculate(FibonacciOperation operationData)
         {
             if (operationData.Value != 1)
             {
-                operationData.Value = (operationData.Value + (operationData.Value - 1));
+                operationData.Value = operationData.Value + (operationData.Value - 1);
             }
             else
             {

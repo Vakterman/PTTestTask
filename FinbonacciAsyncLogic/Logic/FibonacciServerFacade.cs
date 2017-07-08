@@ -7,15 +7,15 @@ namespace FinbonacciAsyncLogic.Logic
 {
     public class FibonacciServerFacade : IFibonacciLogicFacade<FibonacciOperation>
     {
-        private IAsyncSender<FibonacciOperation> _asyncSender;
+        private ISender<FibonacciOperation> _sender;
         private IFibonacciCalculator<FibonacciOperation> _calculator;
         private ILogger _logger;
 
-        public FibonacciServerFacade(IAsyncSender<FibonacciOperation> asyncSender, IFibonacciCalculator<FibonacciOperation> calculator, ILogger logger)
+        public FibonacciServerFacade(ISender<FibonacciOperation> sender, IFibonacciCalculator<FibonacciOperation> calculator, ILogger logger)
         {
-            if (asyncSender == null)
+            if (sender == null)
             {
-                throw new ArgumentNullException("asyncSender");
+                throw new ArgumentNullException("sender");
             }
 
             if (calculator == null)
@@ -29,7 +29,7 @@ namespace FinbonacciAsyncLogic.Logic
             }
 
             _logger = logger;
-            _asyncSender = asyncSender;
+            _sender = sender;
             _calculator = calculator;
         }
         public FibonacciOperation Evaluate(FibonacciOperation operationObject)
@@ -40,7 +40,7 @@ namespace FinbonacciAsyncLogic.Logic
                 _calculator.Calculate(operationObject);
             }
 
-            _asyncSender.SendAsync(operationObject);
+            _sender.Send(operationObject);
             _logger.LogInfoMessage(String.Format("Вычисление с параметрами количство циклов {0} и значение {1} завершено.", operationObject.CycleCount, operationObject.Value));
             return operationObject;
         }

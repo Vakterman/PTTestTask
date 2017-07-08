@@ -16,10 +16,10 @@ namespace FinbonacciAsyncLogic.Logic
         private FibonacciOperation _result;
         private ILogger _logger;
         private IAsyncResultHandler<FibonacciOperation> _fibonacciResultReceiver;
-        private IAsyncSender<FibonacciOperation> _asyncSender;
+        private ISender<FibonacciOperation> _sender;
         private IFibonacciCalculator<FibonacciOperation> _calculator;
 
-        public FibonacciClientFacade(IConfigurationManager configurationManager, IAsyncSender<FibonacciOperation> senderAsyncOperations, IAsyncResultHandler<FibonacciOperation> fibonacciResultReceiver,IFibonacciCalculator<FibonacciOperation> calculator, ILogger logger){
+        public FibonacciClientFacade(IConfigurationManager configurationManager, ISender<FibonacciOperation> senderOperations, IAsyncResultHandler<FibonacciOperation> fibonacciResultReceiver,IFibonacciCalculator<FibonacciOperation> calculator, ILogger logger){
 
             if (logger == null)
             {
@@ -32,9 +32,9 @@ namespace FinbonacciAsyncLogic.Logic
             }
 
 
-            if (senderAsyncOperations == null)
+            if (senderOperations == null)
             {
-                throw new ArgumentNullException("senderAsyncOperations");
+                throw new ArgumentNullException("senderOperations");
             }
 
             if (fibonacciResultReceiver == null)
@@ -49,7 +49,7 @@ namespace FinbonacciAsyncLogic.Logic
 
             _operationCompleteEvent = new AutoResetEvent(false);
             _configurationManager = configurationManager;
-            _asyncSender = senderAsyncOperations;
+            _sender = senderOperations;
             _fibonacciResultReceiver = fibonacciResultReceiver;
             _calculator = calculator;
             _logger = logger;
@@ -90,7 +90,7 @@ namespace FinbonacciAsyncLogic.Logic
 
             if (operationResult.IsOperationInProgress())
             {
-                _asyncSender.SendAsync(operationResult);
+                _sender.Send(operationResult);
 
             }
             else if (operationResult.IsOperationCompleted())
@@ -117,7 +117,7 @@ namespace FinbonacciAsyncLogic.Logic
 
             _calculator.Calculate(operationObject);
 
-            _asyncSender.SendAsync(operationObject);
+            _sender.Send(operationObject);
         }
     }
 }

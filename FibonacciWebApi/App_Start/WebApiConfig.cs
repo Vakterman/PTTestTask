@@ -38,7 +38,7 @@ namespace FibonacciWebApi
                 x.For<ILogger>().Use<Net4LoggerWrapper>();
                 x.For<IConfigurationManager>().Use<Configuration>();
                 x.For<ISenderTransportFactory>().Use<RabbitMqTransportFactory>();
-                x.For<IAsyncSender<FibonacciOperation>>().Use<RabbitMqBusSender>();
+                x.For<ISender<FibonacciOperation>>().Use<RabbitMqBusSender>();
                 x.For<IFibonacciCalculator<FibonacciOperation>>().Use<FibonacciCalculator>();
                 x.For<IFibonacciLogicFacade<FibonacciOperation>>().Use<FibonacciServerFacade>();
             });

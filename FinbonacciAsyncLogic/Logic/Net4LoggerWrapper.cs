@@ -5,7 +5,7 @@ namespace FinbonacciAsyncLogic.Logic
 {
     public class Net4LoggerWrapper : ILogger
     {
-        private ILog _logger;
+        private readonly ILog _logger;
         public Net4LoggerWrapper(ILog logger)
         {
             _logger = logger;

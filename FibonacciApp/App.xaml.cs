@@ -30,7 +30,7 @@ namespace FibonacciApp
                     x.For<ILog>().Use(LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType));
                     x.For<ILogger>().Use<Net4LoggerWrapper>();
                     x.For<IConfigurationManager>().Use<Configuration>();
-                    x.For<IAsyncSender<FibonacciOperation>>().Use<RestSharpAsyncSender>();
+                    x.For<ISender<FibonacciOperation>>().Use<RestSharpSender>();
                     x.For<IAsyncResultHandler<FibonacciOperation>>().Use<RabbitMqResultHandler>();
                     x.For<IFibonacciCalculator<FibonacciOperation>>().Use<FibonacciCalculator>();
                     x.For<IFibonacciCalculator<FibonacciOperation>>().Use<FibonacciCalculator>();

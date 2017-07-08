@@ -5,22 +5,15 @@ using MassTransit;
 
 namespace FinbonacciAsyncLogic.Transport
 {
-    public class RabbitMqBusSender : IAsyncSender<FibonacciOperation>
+    public class RabbitMqBusSender : ISender<FibonacciOperation>
     {
-        private ISenderTransportFactory _transportFactory;
-        private IBusControl _busControl;
+	    private readonly IBusControl _busControl;
 
         public RabbitMqBusSender(ISenderTransportFactory transportFactory) {
-            if (transportFactory == null)
-            {
-                throw new ArgumentNullException("transportFactory");
-            }
-
-            _transportFactory = transportFactory;
-            _busControl = transportFactory.CreateSenderControl();
+	        _busControl = transportFactory?.CreateSenderControl() ?? throw new ArgumentNullException("transportFactory");
             _busControl.Start();
         }
-        public void SendAsync(FibonacciOperation objectForSend)
+        public void Send(FibonacciOperation objectForSend)
         {
             _busControl.Publish(objectForSend);
         }
